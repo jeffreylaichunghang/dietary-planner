@@ -1,0 +1,15 @@
+module.exports = (table) => {
+  table.increments()
+  table.timestamps(false, true)
+  table.string('first_name').notNullable()
+  table.string('last_name').notNullable()
+  table.string('middle_name').notNullable()
+  table.integer('user_credential_id').unsigned().unique()
+  table.foreign('user_credential_id').references('user_credential.id')
+  table.integer('user_address_id').unsigned().unique()
+  table.foreign('user_address_id').references('user_address.id')
+  table.integer('user_subscription_id').unsigned().unique()
+  table.foreign('user_subscription_id').references('user_subscription.id')
+  table.integer('user_info_id').unsigned().unique()
+  table.foreign('user_info_id').references('user_info.id')
+}
