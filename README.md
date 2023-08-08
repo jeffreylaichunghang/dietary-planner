@@ -1,7 +1,7 @@
 
-# Project Title
+# Dietary Planner
 
-A brief description of what this project does and who it's for
+A dietary planner for tracking one's dietary history to achieve his/her healthcare goal
 
 
 ## API Reference
