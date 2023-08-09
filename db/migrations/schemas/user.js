@@ -3,7 +3,7 @@ module.exports = (table) => {
   table.timestamps(false, true)
   table.string('first_name').notNullable()
   table.string('last_name').notNullable()
-  table.string('middle_name').notNullable()
+  table.string('middle_name')
   table.integer('user_credential_id').unsigned().unique()
   table.foreign('user_credential_id').references('user_credential.id')
   table.integer('user_address_id').unsigned().unique()

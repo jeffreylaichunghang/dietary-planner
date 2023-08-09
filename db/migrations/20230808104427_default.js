@@ -27,19 +27,19 @@ exports.up = function (knex) {
  */
 exports.down = function (knex) {
   return knex.schema
+    .dropTable('menu_dish')
+    .dropTable('menu')
+    .dropTable('user')
     .dropTable('user_info')
     .dropTable('user_subscription')
     .dropTable('user_address')
     .dropTable('user_credential')
-    .dropTable('user')
-    .dropTable('menu_dish')
     .dropTable('nutrition_property')
-    .dropTable('menu')
     .dropTable('ingredient_dish')
+    .dropTable('dish')
     .dropTable('dish_cost')
     .dropTable('dish_info')
-    .dropTable('dish')
+    .dropTable('ingredient')
     .dropTable('ingredient_cost')
     .dropTable('ingredient_info')
-    .dropTable('ingredient')
 };
