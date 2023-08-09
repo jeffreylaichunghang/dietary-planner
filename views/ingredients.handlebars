@@ -1,0 +1,26 @@
+<div>
+  {{!-- search button --}}
+  <button id="add-ingredient" class="btn btn-success" style="margin: 1rem 2rem;">Add
+    Ingredient</button>
+</div>
+<table id="ingredient-list" class="table table-hover table-striped" style="overflow-y: auto;">
+  <tr>
+    <th>Ingredient</th>
+    <th>Calories</th>
+    <th>Carb</th>
+    <th>Protein</th>
+    <th>Fat</th>
+  </tr>
+  {{#each ingredient}}
+  <tr>
+    <td>
+      <a href="/ingredient/{{id}}" target="_blank">
+        {{ingredient_name}}</a>
+    </td>
+    <td>{{calories}}</td>
+    <td>{{carb}}</td>
+    <td>{{protein}}</td>
+    <td>{{fat}}</td>
+  </tr>
+  {{/each}}
+</table>

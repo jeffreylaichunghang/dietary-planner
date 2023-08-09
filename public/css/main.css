@@ -1,0 +1,22 @@
+#ingredient {
+  padding: 5rem;
+}
+
+#ingredient-title {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem;
+}
+
+.modal-body {
+  text-align: center;
+  font-size: xx-large;
+  font-weight: bolder;
+  color: red;
+}
+
+#warning-message {
+  font-size: small;
+  font-weight: 500;
+  color: black;
+}

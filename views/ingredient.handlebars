@@ -1,0 +1,94 @@
+{{!-- Modal opened by delete button --}}
+<div class="modal fade" id="deleteIngredient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Ingredient</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ARE YOU SURE ?
+        <br>
+        <small id="warning-message">This ingredient will be permanently deleted.</small>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <a href="/deleteIngredient/{{info.id}}" type="button" class="btn btn-danger" id="delete-ingredient">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+{{!-- Ingredient form for viewing and updating when it is published --}}
+<div id="ingredient">
+  <div id="ingredient-title">
+    <h1>{{info.ingredient_name}}</h1>
+  </div>
+  <div id="ingredient-form">
+    <form action="" method="POST" class="row">
+      <div class="col-md-3">
+        <label for="calories" class="form-label">
+          Calories (cals)
+          <input value="{{info.calories}}" type="text" name="calories" class="form-control" disabled>
+        </label>
+      </div>
+      <div class="col-md-3">
+        <label for="carb" class="form-label">
+          Carbohydrates (g)
+          <input value="{{info.carb}}" type="text" name="carb" class="form-control macros">
+        </label>
+      </div>
+      <div class="col-md-3">
+        <label for="protein" class="form-label">
+          Protein (g)
+          <input value="{{info.protein}}" type="text" name="protein" class="form-control macros">
+        </label>
+      </div>
+      <div class="col-md-3">
+        <label for="fat" class="form-label">
+          Fat (g)
+          <input value="{{info.fat}}" type="text" name="fat" class="form-control macros">
+        </label>
+      </div>
+      <div class="col-md-3">
+        <label for="cholesterol" class="form-label">
+          Cholesterol (mg)
+          <input value="{{info.cholesterol}}" type="text" name="cholesterol" class="form-control">
+        </label>
+      </div>
+      <div class="col-md-3">
+        <label for="trans_fat" class="form-label">
+          Trans Fat (g)
+          <input value="{{info.trans_fat}}" type="text" name="trans_fat" class="form-control">
+        </label>
+      </div>
+      <div class="col-md-3">
+        <label for="sat_fat" class="form-label">
+          Saturated Fat (g)
+          <input value="{{info.sat_fat}}" type="text" name="sat_fat" class="form-control">
+        </label>
+      </div>
+      <div class="col-md-3">
+        <label for="fibre" class="form-label">
+          Fibre (g)
+          <input value="{{info.fibre}}" type="text" name="fibre" class="form-control">
+        </label>
+      </div>
+      <div class="col-md-3">
+        <label for="sodium" class="form-label">
+          Sodium (mg)
+          <input value="{{info.sodium}}" type="text" name="sodium" class="form-control">
+        </label>
+      </div>
+      <div class="col-md-3">
+        <label for="sugar" class="form-label">
+          Sugar (g)
+          <input value="{{info.sugar}}" type="text" name="sugar" class="form-control">
+        </label>
+      </div>
+      <div class="col-md-12">
+        <button type="submit" class="btn btn-primary">Publish</button>
+        <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteIngredient">Delete</a>
+      </div>
+    </form>
+  </div>
+</div>
