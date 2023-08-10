@@ -15,6 +15,10 @@ class Router {
     router.get('/dish', this.getDishPage.bind(this));
     router.get('/menu', this.getMenuPage.bind(this));
 
+    router.post('/addIngredient', this.addIngredient.bind(this))
+
+    router.put('/updateIngredient/:id', this.updateIngredient.bind(this))
+
     router.delete('/deleteIngredient/:id', this.deleteIngredient.bind(this))
 
     return router
@@ -48,11 +52,27 @@ class Router {
     })
   }
 
+  addIngredient(req, res) {
+    console.log('adding new ingredient')
+    console.log(req.body)
+    this.service.addIngredient(req.body).then(() => {
+      res.redirect('/ingredient')
+    })
+  }
+
+  updateIngredient(req, res) {
+    console.log(req.body)
+    console.log(req.params.id)
+    return this.service.updateIngredient(req.body, req.params.id).then(() => {
+      res.redirect(`/ingredient/${req.params.id}`)
+    })
+  }
+
   deleteIngredient(req, res) {
     console.log(req.params.id)
     return this.service.deleteIngredient(req.params.id).then(() => {
-      res.send('ingredient deleted')
-      //res.redirect('/ingredient')
+      //res.send('ingredient deleted')
+      res.redirect('/ingredient')
     })
   }
 

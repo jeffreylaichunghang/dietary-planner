@@ -2,13 +2,19 @@
   padding: 5rem;
 }
 
+#ingredient-link {
+  text-decoration: none;
+
+}
+
 #ingredient-title {
   display: flex;
-  justify-content: space-between;
+  justify-content: left;
+  align-items: center;
   margin: 1rem;
 }
 
-.modal-body {
+#warning-body {
   text-align: center;
   font-size: xx-large;
   font-weight: bolder;

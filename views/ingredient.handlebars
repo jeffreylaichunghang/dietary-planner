@@ -6,14 +6,16 @@
         <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Ingredient</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" id="warning-body">
         ARE YOU SURE ?
         <br>
         <small id="warning-message">This ingredient will be permanently deleted.</small>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <a href="/deleteIngredient/{{info.id}}" type="button" class="btn btn-danger" id="delete-ingredient">Delete</a>
+        <form action="/deleteIngredient/{{info.id}}?_method=DELETE" method="POST">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-danger" id="delete-ingredient">Delete</button>
+        </form>
       </div>
     </div>
   </div>
@@ -21,14 +23,17 @@
 {{!-- Ingredient form for viewing and updating when it is published --}}
 <div id="ingredient">
   <div id="ingredient-title">
+    <span style="margin: 0 1rem;">
+      <a href="/ingredient" class="btn btn-secondary">Back</a>
+    </span>
     <h1>{{info.ingredient_name}}</h1>
   </div>
   <div id="ingredient-form">
-    <form action="" method="POST" class="row">
+    <form action="/updateIngredient/{{info.id}}?_method=PUT" method="POST" class="row" id="ingredient-table">
       <div class="col-md-3">
         <label for="calories" class="form-label">
           Calories (cals)
-          <input value="{{info.calories}}" type="text" name="calories" class="form-control" disabled>
+          <input value="{{info.calories}}" type="text" name="calories" id="calories" class="form-control" disabled>
         </label>
       </div>
       <div class="col-md-3">
@@ -83,6 +88,18 @@
         <label for="sugar" class="form-label">
           Sugar (g)
           <input value="{{info.sugar}}" type="text" name="sugar" class="form-control">
+        </label>
+      </div>
+      <div class="col-md-3">
+        <label for="cost" class="form-label">
+          Cost ($)
+          <input value="{{info.cost}}" type="text" name="cost" class="form-control">
+        </label>
+      </div>
+      <div class="col-md-3">
+        <label for="wholesaler" class="form-label">
+          Wholesaler
+          <input value="{{info.wholesaler}}" type="text" name="wholesaler" class="form-control">
         </label>
       </div>
       <div class="col-md-12">
