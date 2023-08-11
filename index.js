@@ -1,7 +1,10 @@
 //files
-const Router = require('./router/route');
-const Service = require('./service/service');
+const IngredientRouter = require('./router/ingredient-route');
+const DishRoute = require('./router/dish-route')
+const IngredientService = require('./service/ingredient-service');
+const DishService = require('./service/dish-service')
 const knexfile = require('./db/knexfile').development;
+
 //npm modules
 const express = require('express');
 const methodOverride = require('method-override');
@@ -17,8 +20,10 @@ app.use(express.static('public'))
 app.engine('handlebars', engine({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
-const service = new Service(knex);
-app.use('/', new Router(express, service).route());
+const ingredientService = new IngredientService(knex);
+const dishService = new DishService(knex)
+app.use('/', new IngredientRouter(express, ingredientService).route());
+app.use('/', new DishRoute(express, dishService).route())
 
 app.listen(port, () => {
   console.log('app is listening to port ' + port)

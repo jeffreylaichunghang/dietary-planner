@@ -1,4 +1,4 @@
-class Service {
+class IngredientService {
   constructor(knex) {
     this.knex = knex
   }
@@ -40,6 +40,7 @@ class Service {
     let newId = await this.returnId('ingredient')
     newId[0].max++
     console.log(newId)
+
     let calories = Number(carb) * 4 + Number(protein) * 4 + Number(fat) * 9
     if (!calories) return 'cannot get calories'
     console.log(calories)
@@ -161,4 +162,4 @@ class Service {
   }
 }
 
-module.exports = Service
+module.exports = IngredientService

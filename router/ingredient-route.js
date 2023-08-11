@@ -1,6 +1,6 @@
 let scripts = ['/js/main.js']
 
-class Router {
+class IngredientRouter {
   constructor(express, service) {
     this.express = express;
     this.service = service;
@@ -12,13 +12,8 @@ class Router {
     router.get('/home', this.getHomePage.bind(this));
     router.get('/ingredient', this.getIngredientPage.bind(this));
     router.get('/ingredient/:id', this.getIngredient.bind(this));
-    router.get('/dish', this.getDishPage.bind(this));
-    router.get('/menu', this.getMenuPage.bind(this));
-
     router.post('/addIngredient', this.addIngredient.bind(this))
-
     router.put('/updateIngredient/:id', this.updateIngredient.bind(this))
-
     router.delete('/deleteIngredient/:id', this.deleteIngredient.bind(this))
 
     return router
@@ -75,14 +70,6 @@ class Router {
       res.redirect('/ingredient')
     })
   }
-
-  getDishPage(req, res) {
-    res.render('dish')
-  }
-
-  getMenuPage(req, res) {
-    res.render('menu')
-  }
 }
 
-module.exports = Router;
+module.exports = IngredientRouter;

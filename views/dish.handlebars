@@ -1,0 +1,98 @@
+{{!-- Modal opened by delete button --}}
+<div class="modal fade" id="deleteDish" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Dish</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="warning-body">
+        ARE YOU SURE ?
+        <br>
+        <small id="warning-message">This dish will be permanently deleted.</small>
+      </div>
+      <div class="modal-footer">
+        <form action="/deleteIngredient/{{info.id}}?_method=DELETE" method="POST">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-danger" id="delete-ingredient">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{!-- Ingredient form for viewing and updating when it is published --}}
+<div id="ingredient">
+  <div id="ingredient-title">
+    <span style="margin: 0 1rem;">
+      <a href="/dish" class="btn btn-secondary">Back</a>
+    </span>
+    <h1>{{name}}</h1>
+  </div>
+  <div id="dish-form">
+    <form action="/updateDish/{{info.id}}?_method=PUT" method="POST" class="row" id="ingredient-table">
+      <div class="col-md-12">
+        <button type="button" class="btn btn-outline-primary" id="add-item" style="
+        margin: 1rem;">Add Item</button>
+      </div>
+      <table id="dish-list" class="table table-hover table-striped" style="overflow-y: auto;">
+        <tr>
+          <th>Ingredient</th>
+          <th>Portion (g)</th>
+          <th>Units</th>
+          <th>Calories (cal)</th>
+          <th>Carb (g)</th>
+          <th>Protein (g)</th>
+          <th>Fat (g)</th>
+          <th>cholesterol (mg)</th>
+          <th>trans_fat (g)</th>
+          <th>sat_fat (g)</th>
+          <th>fibre (g)</th>
+          <th>sodium (mg)</th>
+          <th>sugar (g)</th>
+          <th>cost</th>
+        </tr>
+        {{#each ingredients}}
+        <tr class="ingredient-info" name="ingredient-info">
+          <td>
+            <a href="/ingredient/{{ingredient_id}}" id="ingredient-link">
+              {{ingredient_name}}</a>
+          </td>
+          <td>{{ingredient_portion}}</td>
+          <td>{{unit}}</td>
+          <td>{{calories}}</td>
+          <td>{{carb}}</td>
+          <td>{{protein}}</td>
+          <td>{{fat}}</td>
+          <td>{{cholesterol}}</td>
+          <td>{{trans_fat}}</td>
+          <td>{{sat_fat}}</td>
+          <td>{{fibre}}</td>
+          <td>{{sodium}}</td>
+          <td>{{sugar}}</td>
+          <td>{{cost}}</td>
+        </tr>
+        {{/each}}
+        <tr class="total">
+          <td>Total</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+      <div class="col-md-12">
+        <button type="submit" class="btn btn-primary">Publish</button>
+        <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteDish">Delete</a>
+      </div>
+    </form>
+  </div>
+</div>

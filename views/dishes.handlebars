@@ -1,0 +1,69 @@
+<div class="modal fade" id="addDish" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add Ingredient</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="/addDish" method="POST">
+        <div class="modal-body row g-3 align-items-center">
+          <div class="col-auto">
+            <label for="name" class="col-form-label">Name:</label>
+          </div>
+          <div class="col-sm">
+            <input type="text" class="form-control" name="name" required>
+          </div>
+          <div class="col-auto">
+            <label for="carb" class="col-form-label">Carb:</label>
+          </div>
+          <div class="col-sm">
+            <input type="text" class="form-control" name="carb" required>
+          </div>
+          <div class="col-auto">
+            <label for="protein" class="col-form-label">Protein:</label>
+          </div>
+          <div class="col-sm">
+            <input type="text" class="form-control" name="protein" required>
+          </div>
+          <div class="col-auto">
+            <label for="fat" class="col-form-label">Fat:</label>
+          </div>
+          <div class="col-sm">
+            <input type="text" class="form-control" name="fat" required>
+          </div>
+        </div>
+        <div class="modal-footer col-auto">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-success" id="add-ingredient">Add</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div>
+  {{!-- search button --}}
+  <button id="add-Dish" class="btn btn-success" style="margin: 1rem 2rem;" data-bs-toggle="modal"
+    data-bs-target="#addDish">Add
+    Dish</button>
+</div>
+<table id="ingredient-list" class="table table-hover table-striped" style="overflow-y: auto;">
+  <tr>
+    <th>Dish</th>
+    <th>Calories</th>
+    <th>Carb</th>
+    <th>Protein</th>
+    <th>Fat</th>
+  </tr>
+  {{#each dish}}
+  <tr>
+    <td>
+      <a href="/dish/{{id}}" id="ingredient-link">
+        {{name}}</a>
+    </td>
+    <td>{{calories}}</td>
+    <td>{{carb}}</td>
+    <td>{{protein}}</td>
+    <td>{{fat}}</td>
+  </tr>
+  {{/each}}
+</table>

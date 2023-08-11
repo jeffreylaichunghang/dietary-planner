@@ -4,7 +4,6 @@
 
 #ingredient-link {
   text-decoration: none;
-
 }
 
 #ingredient-title {
@@ -25,4 +24,8 @@
   font-size: small;
   font-weight: 500;
   color: black;
+}
+
+.total {
+  background-color: bisque;
 }
