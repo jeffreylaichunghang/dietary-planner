@@ -20,6 +20,13 @@ class DishService {
       .join('ingredient_cost', 'ingredient_cost_id', 'ingredient_cost.id')
       .where('dish.id', id)
   }
+
+  async getIngredientInfo() {
+    console.log('getting ingredient')
+    return await this.knex('ingredient')
+      .join('ingredient_info', 'ingredient_info_id', 'ingredient_info.id')
+      .join('ingredient_cost', 'ingredient_cost_id', 'ingredient_cost.id')
+  }
 }
 
 module.exports = DishService

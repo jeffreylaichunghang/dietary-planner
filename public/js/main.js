@@ -29,15 +29,281 @@ $('#ingredient-table').submit(() => {
 })
 
 // Dish
+const table = document.getElementById("dish-list");
+let AllIngredient, selectedItem;
+let row, unit, portion, value;
+let cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, cell9, cell10, cell11, cell12, cell13, cell14;
+
 $(document).ready(() => {
-  const table = document.getElementById("dish-list")
+  getIngredientsRows()// get ingredients rows correct value
+  getTotalRow(table)
+  getAllIngredient()
+    .then((data) => {
+      console.log(data[0])
+      data.forEach(ingredient => {
+        let option = `<option value='${ingredient.ingredient_name}'>${ingredient.ingredient_name}</option>`
+        $('#selectIngredient').append(option)
+      });
+
+      AllIngredient = data
+    })
+})
+
+$('#selectIngredient').change(function () {
+  console.log($(this).val())
+  selectedItem = $(this).val()
+})
+
+$('#selectUnit, .portionUnit').change(function () {
+  console.log($(this).val())
+  unit = $(this).val()
+})
+
+$('#add-item').on('click', () => {
+  portion = $('#selectPortion').val()
+  console.log(selectedItem)
+  console.log(AllIngredient)
+  console.log(portion)
+  console.log(unit)
+
+  calculatePortion(portion, unit)
+  addNewColumn(table)
+
+  let selectedItemInfo = AllIngredient.filter(item => item.ingredient_name == selectedItem)
+  console.log(selectedItemInfo)
+
+  cell1.innerHTML = `
+    <span class="left">
+              <a href="/ingredient/${selectedItemInfo[0].id}" id="ingredient-link">
+                ${selectedItemInfo[0].ingredient_name}
+              </a>
+              <i class="fa-solid fa-pen-to-square edit-btn" type="button"></i>
+    </span>
+    <span class="right disappear">
+      <i class="fa-solid fa-check fa-xl check-btn" type="button"></i>
+      <i class="fa-solid fa-xmark fa-xl cancel-btn" style="color: #fa0000;" type="button"></i>
+    </span>
+  `
+  cell2.innerText = value
+  cell3.innerText = unit
+  cell4.innerText = selectedItemInfo[0].calories
+  cell5.innerText = selectedItemInfo[0].carb
+  cell6.innerText = selectedItemInfo[0].protein
+  cell7.innerText = selectedItemInfo[0].fat
+  cell8.innerText = selectedItemInfo[0].cholesterol
+  cell9.innerText = selectedItemInfo[0].trans_fat
+  cell10.innerText = selectedItemInfo[0].sat_fat
+  cell11.innerText = selectedItemInfo[0].fibre
+  cell12.innerText = selectedItemInfo[0].sodium
+  cell13.innerText = selectedItemInfo[0].sugar
+  cell14.innerText = selectedItemInfo[0].cost
+
+  handleEditInputs()
+  attachButtonsFunctionality(row)
   getTotalRow(table)
 })
 
+$('.edit-btn').on('click', function () {
+  console.log('edit button')
+  $(this).parent().siblings().removeClass('disappear')
+  $(this).addClass('disappear')
+  $('.portionValue').removeClass('disappear')
+  $('.portionUnit').removeClass('disappear')
+})
 
+$('.check-btn').on('click', function () {
+  $(this).parent().prev().children().removeClass('disappear')
+  $(this).parent().addClass('disappear')
+  $('.portionValue').addClass('disappear')
+  $('.portionUnit').addClass('disappear')
+
+  //get portion input value and unit
+  let portionValue = $('.portionValue').val()
+  console.log(portionValue, unit)
+  let rowIndex = this.parentNode.parentNode.parentNode.rowIndex;
+
+  if (!portionValue || portionValue == 0) {
+    portionValue = 1
+  }
+  if (!unit || unit === undefined) {
+    unit = 'gram'
+  }
+
+  updateRow(rowIndex, portionValue, unit)
+  getTotalRow(table)
+})
+
+$('.cancel-btn').on('click', function () {
+  let rowIndex = this.parentNode.parentNode.parentNode.rowIndex;
+  console.log(rowIndex)
+  deleteRow(rowIndex)
+})
 
 function calculateCalories(c, p, f, cb) {
   return cb(c * 4 + p * 4 + f * 9)
+}
+
+function calculatePortion(portion, unit) {
+
+  switch (unit) {
+    case 'ounce':
+      value = portion * 28.3495
+      break;
+    case 'gram':
+      value = portion * 1
+      break;
+    case 'millimeter':
+      value = portion * 1
+      break;
+    case 'litres':
+      value = portion * 1000
+      break;
+    case 'pound':
+      value = portion * 453.592
+      break;
+    case 'teaspoon':
+      value = portion * 5.69
+      break;
+    case 'tablespoon':
+      value = portion * 14.175
+      break;
+    case 'cup':
+      value = portion * 140
+      break;
+
+    default:
+      value = portion * 1
+      break;
+  }
+
+}
+
+function handleEditInputs() {
+  let input = document.createElement('input')
+  let select = document.createElement('select')
+
+  input.setAttribute('type', 'number')
+  input.setAttribute('name', 'portionValue')
+  input.setAttribute('placeholder', 'Portion')
+  input.setAttribute('class', 'disappear')
+  input.setAttribute('class', 'portionValue')
+
+  select.setAttribute('class', 'portionUnit')
+  select.setAttribute('class', 'disappear')
+  select.innerHTML = `
+    <option value="">--Unit</option>
+    <option value="ounce">Ounce</option>
+    <option value="gram">Gram</option>
+    <option value="millimeter">Millimeter</option>
+    <option value="litres">Litres</option>
+    <option value="pound">Pound</option>
+    <option value="teaspoon">Teaspoon</option>
+    <option value="tablespoon">Tablespoon</option>
+    <option value="cup">Cup</option>
+  `
+
+  //$('#newItem-section').append(input)
+  $('#newItem-section').append(select)
+}
+
+function attachButtonsFunctionality(row) {
+  const editButton = row.querySelector('.edit-btn');
+  const checkButton = row.querySelector('.check-btn')
+  const cancelButton = row.querySelector('.cancel-btn')
+
+
+  editButton.addEventListener('click', function () {
+    console.log('edit button')
+    $(this).parent().siblings().removeClass('disappear')
+    $(this).addClass('disappear')
+    $('.portionValue').removeClass('disappear')
+    $('.portionUnit').removeClass('disappear')
+  })
+  checkButton.addEventListener('click', function () {
+    $(this).parent().prev().children().removeClass('disappear')
+    $(this).parent().addClass('disappear')
+    $('.portionValue').addClass('disappear')
+    $('.portionUnit').addClass('disappear')
+
+    let portionValue = $('.portionValue').val()
+    console.log(portionValue, unit)
+    let rowIndex = this.parentNode.parentNode.parentNode.rowIndex;
+
+    if (!portionValue || portionValue == 0) {
+      portionValue = 1
+    }
+    if (!unit || unit === undefined) {
+      unit = 'gram'
+    }
+
+    updateRow(rowIndex, portionValue, unit)
+    getTotalRow(table)
+  })
+  cancelButton.addEventListener('click', function () {
+    let rowIndex = this.parentNode.parentNode.parentNode.rowIndex;
+    console.log(rowIndex)
+    deleteRow(rowIndex)
+  })
+}
+
+function addNewColumn(table) {
+  row = table.insertRow(1);//insert <tr>
+
+  cell1 = row.insertCell(0)
+  cell2 = row.insertCell(1)
+  cell3 = row.insertCell(2)
+  cell4 = row.insertCell(3)
+  cell5 = row.insertCell(4)
+  cell6 = row.insertCell(5)
+  cell7 = row.insertCell(6)
+  cell8 = row.insertCell(7)
+  cell9 = row.insertCell(8)
+  cell10 = row.insertCell(9)
+  cell11 = row.insertCell(10)
+  cell12 = row.insertCell(11)
+  cell13 = row.insertCell(12)
+  cell14 = row.insertCell(13)
+}
+
+function deleteRow(index) {
+  table.deleteRow(index)
+  getTotalRow(table)
+}
+
+function updateRow(index, portion, unit) {
+  let row = table.rows[index]
+  let originalPortion = row.querySelectorAll('td')[1].innerText
+  console.log(originalPortion)
+
+  calculatePortion(portion, unit)
+
+  let changeRatio = value / Number(originalPortion)
+  console.log('newPortion ', value)
+  console.log('changeRatio ', changeRatio)
+
+  row.querySelectorAll('td')[1].innerText = value.toFixed(2)
+  row.querySelectorAll('td')[2].innerText = unit
+
+  for (let i = 3; i < 14; i++) {
+    let cellData = row.querySelectorAll('td')[i].innerText
+    cellData = Number(cellData) * changeRatio
+    row.querySelectorAll('td')[i].innerText = cellData.toFixed(2)
+  }
+}
+
+function getAllIngredient() {
+  console.log('getting ingredient')
+  return new Promise((resolve, reject) => {
+    $.ajax({
+      url: 'http://localhost:3000/selectIngredient',
+      success: function (result) {
+        resolve(result)
+      },
+      error: function (err) {
+        reject(err)
+      }
+    })
+  })
 }
 
 function getTotalRow(table) {
@@ -48,7 +314,6 @@ function getTotalRow(table) {
   let columnLength = rows[0].querySelectorAll('th').length
 
   for (let j = 1; j < columnLength; j++) {
-    let totalCell = lastRow.querySelectorAll('td')[j].innerText // all cells from the last column
     let total = 0
 
     for (let i = 1; i < rows.length - 1; i++) {
@@ -56,11 +321,29 @@ function getTotalRow(table) {
       (total) += Number(td)
     }
 
-    console.log(total)
-    if (total === NaN) {
+    //console.log(total)
+    if (Number.isNaN(total)) {
       lastRow.querySelectorAll('td')[j].innerText = ''
     } else {
       lastRow.querySelectorAll('td')[j].innerText = total.toFixed(2)
     }
+  }
+}
+
+function getIngredientsRows() {
+  const body = table.tBodies[0]
+  const rows = Array.from(body.querySelectorAll('tr'));
+
+  for (let j = 1; j < rows.length - 1; j++) {
+    let portion = rows[j].querySelectorAll('td')[1].innerText
+    console.log('row', j, 'portion:', Number(portion))
+    let portionRatio = Number(portion) / 100
+
+    for (let i = 3; i < 14; i++) {
+      let cell = rows[j].querySelectorAll('td')[i].innerText
+      let finalValue = Number(cell) * portionRatio
+      rows[j].querySelectorAll('td')[i].innerText = finalValue
+    }
+
   }
 }

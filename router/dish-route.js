@@ -11,6 +11,8 @@ class DishRoute {
 
     router.get('/dish', this.getDishPage.bind(this))
     router.get('/dish/:id', this.getDishInfo.bind(this))
+    router.get('/selectIngredient', this.getAllIngredient.bind(this))
+    router.put('/updateDish/:id', this.updateDish.bind(this))
 
     return router
   }
@@ -35,6 +37,18 @@ class DishRoute {
         name: data[0].name
       })
     })
+  }
+
+  getAllIngredient(req, res) {
+    console.log('request recieved')
+    return this.service.getIngredientInfo().then((data) => {
+      console.log(data)
+      res.json(data)
+    })
+  }
+
+  updateDish(req, res) {
+    console.log(req.body)
   }
 }
 

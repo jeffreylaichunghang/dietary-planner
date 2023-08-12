@@ -13,9 +13,42 @@
       </div>
       <div class="modal-footer">
         <form action="/deleteIngredient/{{info.id}}?_method=DELETE" method="POST">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary closing" data-bs-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-danger" id="delete-ingredient">Delete</button>
         </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{!-- modal opened by add button --}}
+<div class="modal fade" id="addIngredient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add a New Ingredient</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <select id="selectIngredient">
+          <option value="">--Ingredient</option>
+        </select>
+        <input type="number" value="1" name="portion" id="selectPortion">
+        <select id="selectUnit">
+          <option value="">--Unit</option>
+          <option value="ounce">Ounce</option>
+          <option value="gram">Gram</option>
+          <option value="millimeter">Millimeter</option>
+          <option value="litres">Litres</option>
+          <option value="pound">Pound</option>
+          <option value="teaspoon">Teaspoon</option>
+          <option value="tablespoon">Tablespoon</option>
+          <option value="cup">Cup</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button id="add-item" type="submit" class="btn btn-danger" id="add-ingredient" data-bs-dismiss="modal">Add
+          Item</button>
       </div>
     </div>
   </div>
@@ -30,9 +63,21 @@
   </div>
   <div id="dish-form">
     <form action="/updateDish/{{info.id}}?_method=PUT" method="POST" class="row" id="ingredient-table">
-      <div class="col-md-12">
-        <button type="button" class="btn btn-outline-primary" id="add-item" style="
-        margin: 1rem;">Add Item</button>
+      <div class="col-md-12" id="newItem-section">
+        <button type="button" class="btn btn-outline-primary" id="new-item" style="
+        margin: 1rem;" data-bs-toggle="modal" data-bs-target="#addIngredient">New Item</button>
+        <input type="number" name="portionValue" placeholder="Portion" class="disappear portionValue">
+        <select class="disappear portionUnit">
+          <option value="">--Unit</option>
+          <option value="ounce">Ounce</option>
+          <option value="gram">Gram</option>
+          <option value="millimeter">Millimeter</option>
+          <option value="litres">Litres</option>
+          <option value="pound">Pound</option>
+          <option value="teaspoon">Teaspoon</option>
+          <option value="tablespoon">Tablespoon</option>
+          <option value="cup">Cup</option>
+        </select>
       </div>
       <table id="dish-list" class="table table-hover table-striped" style="overflow-y: auto;">
         <tr>
@@ -54,8 +99,16 @@
         {{#each ingredients}}
         <tr class="ingredient-info" name="ingredient-info">
           <td>
-            <a href="/ingredient/{{ingredient_id}}" id="ingredient-link">
-              {{ingredient_name}}</a>
+            <span class="left">
+              <a href="/ingredient/{{ingredient_id}}" id="ingredient-link">
+                {{ingredient_name}}
+              </a>
+              <i class="fa-solid fa-pen-to-square edit-btn" type="button"></i>
+            </span>
+            <span class="right disappear">
+              <i class="fa-solid fa-check fa-xl check-btn" type="button"></i>
+              <i class="fa-solid fa-xmark fa-xl cancel-btn" style="color: #fa0000;" type="button"></i>
+            </span>
           </td>
           <td>{{ingredient_portion}}</td>
           <td>{{unit}}</td>
