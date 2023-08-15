@@ -1,4 +1,5 @@
 {{!-- Modal opened by delete button --}}
+{{!-- {{> fail-notification}} --}}
 <div class="modal fade" id="deleteDish" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -12,9 +13,9 @@
         <small id="warning-message">This dish will be permanently deleted.</small>
       </div>
       <div class="modal-footer">
-        <form action="/deleteIngredient/{{info.id}}?_method=DELETE" method="POST">
+        <form action="/deleteDish/{{id}}?_method=DELETE" method="POST">
           <button type="button" class="btn btn-secondary closing" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-danger" id="delete-ingredient">Delete</button>
+          <button type="submit" class="btn btn-danger" id="delete-dish">Delete</button>
         </form>
       </div>
     </div>
@@ -62,23 +63,25 @@
     <h1>{{name}}</h1>
   </div>
   <div id="dish-form">
-    <form action="/updateDish/{{info.id}}?_method=PUT" method="POST" class="row" id="ingredient-table">
-      <div class="col-md-12" id="newItem-section">
-        <button type="button" class="btn btn-outline-primary" id="new-item" style="
+
+    <div class="col-md-12" id="newItem-section">
+      <button type="button" class="btn btn-outline-primary" id="new-item" style="
         margin: 1rem;" data-bs-toggle="modal" data-bs-target="#addIngredient">New Item</button>
-        <input type="number" name="portionValue" placeholder="Portion" class="disappear portionValue">
-        <select class="disappear portionUnit">
-          <option value="">--Unit</option>
-          <option value="ounce">Ounce</option>
-          <option value="gram">Gram</option>
-          <option value="millimeter">Millimeter</option>
-          <option value="litres">Litres</option>
-          <option value="pound">Pound</option>
-          <option value="teaspoon">Teaspoon</option>
-          <option value="tablespoon">Tablespoon</option>
-          <option value="cup">Cup</option>
-        </select>
-      </div>
+      <input type="number" name="portionValue" placeholder="Portion" class="disappear portionValue">
+      <select class="disappear portionUnit">
+        <option value="">--Unit</option>
+        <option value="ounce">Ounce</option>
+        <option value="gram">Gram</option>
+        <option value="millimeter">Millimeter</option>
+        <option value="litres">Litres</option>
+        <option value="pound">Pound</option>
+        <option value="teaspoon">Teaspoon</option>
+        <option value="tablespoon">Tablespoon</option>
+        <option value="cup">Cup</option>
+      </select>
+    </div>
+
+    <form class="row" id="dish-table" data-dish-id="{{id}}">
       <table id="dish-list" class="table table-hover table-striped" style="overflow-y: auto;">
         <tr>
           <th>Ingredient</th>
@@ -142,10 +145,12 @@
           <td></td>
         </tr>
       </table>
+
       <div class="col-md-12">
-        <button type="submit" class="btn btn-primary">Publish</button>
+        <button type="submit" class="btn btn-primary submit-tbn">Publish</button>
         <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteDish">Delete</a>
       </div>
+
     </form>
   </div>
 </div>
