@@ -42,6 +42,7 @@ class DishService {
       data.ingredientList.forEach((i) => ingredientName.push(Object.values(i)[0].trim()))
       data.ingredientList.forEach((p) => ingredientPortion.push(Number(Object.values(p)[1])))
       data.ingredientList.forEach((u) => ingredientUnit.push(Object.values(u)[2].trim()))
+      ingredientUnit.forEach((s, i) => ingredientUnit[i] = s.replace(/[0-9.]/g, '').trim())
       const dataValue = Object.values(data.totalRowValue[0]).map((v) => Number(v))
 
       try {
