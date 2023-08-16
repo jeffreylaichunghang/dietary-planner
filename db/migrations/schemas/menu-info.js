@@ -1,0 +1,16 @@
+module.exports = (table) => {
+  table.increments()
+  table.timestamps(false, true)
+  table.decimal('calories')
+  table.decimal('carb')
+  table.decimal('protein')
+  table.decimal('fat')
+  table.decimal('cholesterol')
+  table.decimal('trans_fat')
+  table.decimal('sat_fat')
+  table.decimal('fibre')
+  table.decimal('sodium')
+  table.decimal('sugar')
+  table.integer('menu_id').unsigned()
+  table.foreign('menu_id').references('menu.id')
+}
