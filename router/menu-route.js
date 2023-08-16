@@ -1,4 +1,4 @@
-let scripts = ['/js/main.js']
+let scripts = ['/js/main.js', '/js/menu.js']
 
 class MenuRoute {
   constructor(express, service) {
@@ -9,20 +9,34 @@ class MenuRoute {
   route() {
     let router = this.express.Router()
 
-    router.get('/menu', this.getMenu.bind(this))
+    router.get('/menu', this.showMenu.bind(this))
+    router.get('/getMenu', this.getMenu.bind(this))
 
     return router
   }
 
+  showMenu(req, res) {
+    res.render('menus', { script: scripts[1] })
+  }
+
   getMenu(req, res) {
-    // return this.service.getMenu().then((data) => {
-    //   res.render('menu', {
-    //       scripts: scripts[0],
-    //       data: data
-    //     })
-    //   })
-    // }
-    res.send('this is the menu page')
+    console.log(req.query)
+
+    let user = 1
+    return this.service.getMenu(user, req.query).then((data) => {
+      if (data.length == 0) {
+        res.render('menus', {
+          scripts: scripts[1],
+          data: data
+        })
+      } else {
+        // res.render('menus', {
+        //   scripts: scripts[1],
+        //   data: data
+        // })
+        res.send(data)
+      }
+    })
   }
 }
 

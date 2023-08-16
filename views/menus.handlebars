@@ -1,0 +1,127 @@
+{{!-- modal opened by add button --}}
+<div class="modal fade" id="alterMenu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add a New Dish</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <select id="selectIngredient">
+          <option value="">--Dish</option>
+        </select>
+        <input type="number" value="1" name="portion" id="selectPortion">
+        <select id="selectUnit">
+          <option value="">--Unit</option>
+          <option value="ounce">Ounce</option>
+          <option value="gram">Gram</option>
+          <option value="millimeter">Millimeter</option>
+          <option value="litres">Litres</option>
+          <option value="pound">Pound</option>
+          <option value="teaspoon">Teaspoon</option>
+          <option value="tablespoon">Tablespoon</option>
+          <option value="cup">Cup</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button id="add-item" type="submit" class="btn btn-danger" id="add-ingredient" data-bs-dismiss="modal">Add
+          Item</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{{!-- add search button --}}
+
+<div id="menu">
+
+
+  <div id="dish-form">
+
+    <form id="date-form" action="/getMenu?">
+      <div class="col-md-12" id="date-section">
+        <input type="date" name="date" id="date">
+        <button type="submit">Get Menu</button>
+      </div>
+    </form>
+
+    <div class="col-md-12" id="newItem-section">
+      <button type="button" class="btn btn-outline-primary" id="new-item" style="
+        margin: 1rem;" data-bs-toggle="modal" data-bs-target="#addIngredient">New Item</button>
+      <input type="number" name="portionValue" placeholder="Portion" class="disappear portionValue">
+    </div>
+
+    <form class="row" id="menu-table" data-menu-id="{{id}}">
+      <table id="dish-list" class="table table-hover table-striped" style="overflow-y: auto;">
+        <tr>
+          <th>Meal</th>
+          <th>Dish</th>
+          <th>Portion (g)</th>
+          <th>Calories (cal)</th>
+          <th>Carb (g)</th>
+          <th>Protein (g)</th>
+          <th>Fat (g)</th>
+          <th>cholesterol (mg)</th>
+          <th>trans_fat (g)</th>
+          <th>sat_fat (g)</th>
+          <th>fibre (g)</th>
+          <th>sodium (mg)</th>
+          <th>sugar (g)</th>
+          <th>cost</th>
+        </tr>
+        {{#each dishes}}
+        <tr class="dish-info" name="dish-info">
+          <td></td>
+          <td>
+            <span class="left">
+              <a href="/dish/{{ingredient_id}}" id="dish-link">
+                {{ingredient_name}}
+              </a>
+              <i class="fa-solid fa-pen-to-square edit-btn" type="button"></i>
+            </span>
+            <span class="right disappear">
+              <i class="fa-solid fa-check fa-xl check-btn" type="button"></i>
+              <i class="fa-solid fa-xmark fa-xl cancel-btn" style="color: #fa0000;" type="button"></i>
+            </span>
+          </td>
+          <td>{{ingredient_portion}}</td>
+          <td>{{calories}}</td>
+          <td>{{carb}}</td>
+          <td>{{protein}}</td>
+          <td>{{fat}}</td>
+          <td>{{cholesterol}}</td>
+          <td>{{trans_fat}}</td>
+          <td>{{sat_fat}}</td>
+          <td>{{fibre}}</td>
+          <td>{{sodium}}</td>
+          <td>{{sugar}}</td>
+          <td>{{cost}}</td>
+        </tr>
+        {{/each}}
+        <tr class="total">
+          <td>Total</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+
+      <div class="col-md-12">
+        <button type="submit" class="btn btn-primary submit-tbn">Publish</button>
+      </div>
+
+    </form>
+  </div>
+</div>
