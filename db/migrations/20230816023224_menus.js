@@ -20,7 +20,7 @@ exports.down = function (knex) {
   return knex.schema
     .alterTable('menu', table => {
       table.dropColumn('day')
-      table.unique('user_id')
+      // table.unique('user_id')
     })
     .dropTable('menu_cost')
     .dropTable('menu_info')

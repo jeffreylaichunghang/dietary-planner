@@ -7,21 +7,17 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <select id="selectIngredient">
+        <select id="selectDish">
           <option value="">--Dish</option>
         </select>
-        <input type="number" value="1" name="portion" id="selectPortion">
-        <select id="selectUnit">
-          <option value="">--Unit</option>
-          <option value="ounce">Ounce</option>
-          <option value="gram">Gram</option>
-          <option value="millimeter">Millimeter</option>
-          <option value="litres">Litres</option>
-          <option value="pound">Pound</option>
-          <option value="teaspoon">Teaspoon</option>
-          <option value="tablespoon">Tablespoon</option>
-          <option value="cup">Cup</option>
+        <select id="selectMeal">
+          <option value="">--Meal</option>
+          <option value="Breakfast">--Breakfast</option>
+          <option value="Lunch">--Lunch</option>
+          <option value="Dinner">--Dinner</option>
+          <option value="Snack">--Snack</option>
         </select>
+        <input type="number" value="1" name="portion" id="selectPortion">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -42,19 +38,26 @@
 
     <form id="date-form" action="/getMenu?">
       <div class="col-md-12" id="date-section">
-        <input type="date" name="date" id="date">
+        <input type="date" name="date" id="date" value={{date}}>
         <button type="submit">Get Menu</button>
       </div>
     </form>
 
     <div class="col-md-12" id="newItem-section">
       <button type="button" class="btn btn-outline-primary" id="new-item" style="
-        margin: 1rem;" data-bs-toggle="modal" data-bs-target="#addIngredient">New Item</button>
+        margin: 1rem;" data-bs-toggle="modal" data-bs-target="#alterMenu">New Item</button>
       <input type="number" name="portionValue" placeholder="Portion" class="disappear portionValue">
+      <select class="disappear selectMeal">
+        <option value="">--Meal</option>
+        <option value="breakfast">--Breakfast</option>
+        <option value="lunch">--Lunch</option>
+        <option value="dinner">--Dinner</option>
+        <option value="snack">--Snack</option>
+      </select>
     </div>
 
     <form class="row" id="menu-table" data-menu-id="{{id}}">
-      <table id="dish-list" class="table table-hover table-striped" style="overflow-y: auto;">
+      <table id="menu-list" class="table table-hover table-striped" style="overflow-y: auto;">
         <tr>
           <th>Meal</th>
           <th>Dish</th>
@@ -72,12 +75,12 @@
           <th>cost</th>
         </tr>
         {{#each dishes}}
-        <tr class="dish-info" name="dish-info">
-          <td></td>
+        <tr class="menu-info" name="menu-info">
+          <td>{{meal}}</td>
           <td>
             <span class="left">
-              <a href="/dish/{{ingredient_id}}" id="dish-link">
-                {{ingredient_name}}
+              <a href="/dish/{{dish_id}}" id="dish-link">
+                {{name}}
               </a>
               <i class="fa-solid fa-pen-to-square edit-btn" type="button"></i>
             </span>
@@ -86,7 +89,7 @@
               <i class="fa-solid fa-xmark fa-xl cancel-btn" style="color: #fa0000;" type="button"></i>
             </span>
           </td>
-          <td>{{ingredient_portion}}</td>
+          <td>{{dish_portion}}</td>
           <td>{{calories}}</td>
           <td>{{carb}}</td>
           <td>{{protein}}</td>
@@ -101,8 +104,8 @@
         </tr>
         {{/each}}
         <tr class="total">
-          <td>Total</td>
           <td></td>
+          <td>Total</td>
           <td></td>
           <td></td>
           <td></td>
@@ -120,6 +123,15 @@
 
       <div class="col-md-12">
         <button type="submit" class="btn btn-primary submit-tbn">Publish</button>
+      </div>
+
+      <div>
+        <div>
+          {{!-- customer details --}}
+        </div>
+        <div>
+          {{!-- Summary --}}
+        </div>
       </div>
 
     </form>

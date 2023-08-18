@@ -1,6 +1,7 @@
 module.exports = (table) => {
   table.increments()
   table.timestamps(false, true)
+  table.decimal('portion')
   table.decimal('calories')
   table.decimal('carb')
   table.decimal('protein')
