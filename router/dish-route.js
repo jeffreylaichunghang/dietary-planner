@@ -1,4 +1,5 @@
 let scripts = ['/js/main.js']
+const { isLoggedIn } = require('../utilities/middleware')
 
 class DishRoute {
   constructor(express, service) {
@@ -9,9 +10,9 @@ class DishRoute {
   route() {
     const router = this.express.Router()
 
-    router.get('/dish', this.getDishPage.bind(this))
-    router.get('/dish/:id', this.getDishInfo.bind(this))
-    router.get('/selectIngredient', this.getAllIngredient.bind(this))
+    router.get('/dish', isLoggedIn, this.getDishPage.bind(this))
+    router.get('/dish/:id', isLoggedIn, this.getDishInfo.bind(this))
+    router.get('/selectIngredient', isLoggedIn, this.getAllIngredient.bind(this))
     router.put('/updateDish/:id', this.updateDish.bind(this))
     router.post('/addDish', this.addDish.bind(this))
     router.delete('/deleteDish/:id', this.deleteDish.bind(this))

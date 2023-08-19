@@ -1,3 +1,24 @@
+body {
+  height: 100vh;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.auth-page {
+  text-align: center;
+  width: 30%;
+  margin: auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 #ingredient,
 #menu {
   padding: 5rem;

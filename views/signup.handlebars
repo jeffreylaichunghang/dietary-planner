@@ -1,0 +1,31 @@
+<div class="auth-page">
+  <form class="form-signin" method="POST" action="/signup">
+    <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72"
+      height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Sign Up</h1>
+
+    <div class="input-group">
+      <span class="input-group-text">First name</span>
+      <input type="text" aria-label="First name" class="form-control" name="firstname">
+    </div>
+    <div class="input-group">
+      <span class="input-group-text">Middle name</span>
+      <input type="text" aria-label="Middle name" class="form-control" name="middlename">
+    </div>
+    <div class="input-group">
+      <span class="input-group-text">Last name</span>
+      <input type="text" aria-label="Last name" class="form-control" name="lastname">
+    </div>
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="email">
+    <label for="inputUsername" class="sr-only">Username</label>
+    <input type="username" id="inputUsername" class="form-control" placeholder="Username" name="username" required
+      autofocus>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
+
+    <br>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+    <p class="mt-5 mb-3 text-muted">&copy; 2023-2024</p>
+  </form>
+</div>

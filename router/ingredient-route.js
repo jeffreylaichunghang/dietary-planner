@@ -1,4 +1,6 @@
 let scripts = ['/js/main.js']
+const { isLoggedIn } = require('../utilities/middleware')
+
 
 class IngredientRouter {
   constructor(express, service) {
@@ -9,9 +11,9 @@ class IngredientRouter {
   route() {
     const router = this.express.Router();
 
-    router.get('/home', this.getHomePage.bind(this));
-    router.get('/ingredient', this.getIngredientPage.bind(this));
-    router.get('/ingredient/:id', this.getIngredient.bind(this));
+    router.get('/home', isLoggedIn, this.getHomePage.bind(this));
+    router.get('/ingredient', isLoggedIn, this.getIngredientPage.bind(this));
+    router.get('/ingredient/:id', isLoggedIn, this.getIngredient.bind(this));
     router.post('/addIngredient', this.addIngredient.bind(this))
     router.put('/updateIngredient/:id', this.updateIngredient.bind(this))
     router.delete('/deleteIngredient/:id', this.deleteIngredient.bind(this))

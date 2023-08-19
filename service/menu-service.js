@@ -37,6 +37,7 @@ class MenuService {
   async getMenu(userId, date) {
     let formatDate = this.formatDate(date.date)
     console.log('formatDate :', formatDate)
+    console.log('userId :', userId)
 
     //check if a user has a menu
     const hasMenu = await this.hasMenu(userId, formatDate)

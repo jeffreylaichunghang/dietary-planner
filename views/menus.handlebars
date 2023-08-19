@@ -32,14 +32,19 @@
 {{!-- add search button --}}
 
 <div id="menu">
-
+  <div class="top">
+    <h1>Hello! {{user.first_name}} {{#if user.middle_name}}{{user.middle_name}}{{/if}} {{user.last_name}}</h1>
+    <form action="/logout" method="POST">
+      <button class="btn btn-secondary" type="submit">Logout</button>
+    </form>
+  </div>
 
   <div id="dish-form">
 
     <form id="date-form" action="/getMenu?">
       <div class="col-md-12" id="date-section">
         <input type="date" name="date" id="date" value={{date}}>
-        <button type="submit">Get Menu</button>
+        <button type="submit" class="btn btn-outline-success">Get Menu</button>
       </div>
     </form>
 
@@ -56,7 +61,7 @@
       </select>
     </div>
 
-    <form class="row" id="menu-table" data-menu-id="{{id}}">
+    <form class="row" id="menu-table" data-menu-id={{id}}>
       <table id="menu-list" class="table table-hover table-striped" style="overflow-y: auto;">
         <tr>
           <th>Meal</th>
