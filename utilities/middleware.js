@@ -11,6 +11,7 @@ function notLoggedIn(req, res, next) {
   }
   res.redirect('/menu')
 }
+
 module.exports = {
   isLoggedIn,
   notLoggedIn,

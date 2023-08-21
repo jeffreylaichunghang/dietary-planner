@@ -1,6 +1,5 @@
 let scripts = ['/js/main.js']
-const { isLoggedIn } = require('../utilities/middleware')
-
+const { isLoggedIn, pagination } = require('../utilities/middleware')
 
 class IngredientRouter {
   constructor(express, service) {
@@ -11,9 +10,8 @@ class IngredientRouter {
   route() {
     const router = this.express.Router();
 
-    router.get('/home', isLoggedIn, this.getHomePage.bind(this));
-    router.get('/ingredient', isLoggedIn, this.getIngredientPage.bind(this));
-    router.get('/ingredient/:id', isLoggedIn, this.getIngredient.bind(this));
+    router.get('/ingredient', this.getIngredientPage.bind(this));
+    router.get('/ingredient/:id', this.getIngredient.bind(this));
     router.post('/addIngredient', this.addIngredient.bind(this))
     router.put('/updateIngredient/:id', this.updateIngredient.bind(this))
     router.delete('/deleteIngredient/:id', this.deleteIngredient.bind(this))
@@ -21,24 +19,26 @@ class IngredientRouter {
     return router
   }
 
-  getHomePage(req, res) {
-    res.render('home', {
-      script: scripts
-    })
-  }
-
   getIngredientPage(req, res) {
-    return this.service.getIngredientPage().then((ingredients) => {
-      //res.send(data)
+    const page = req.query.page
+    console.log('page :', page)
+    return this.service.getIngredientPage(page).then((data) => {
+      //res.send(ingredients)
+      console.log(data.thisPage)
+      console.log(data)
       res.render('ingredients', {
-        ingredient: ingredients,
-        script: scripts
+        ingredient: data.result,
+        limit: data.limit,
+        previous: data.previous,
+        thisPage: data.thisPage,
+        next: data.next,
+        script: scripts,
       })
     })
   }
 
   getIngredient(req, res) {
-    console.log(req.params.id)
+    //console.log(req.params.id)
     return this.service.getIngredient(req.params.id).then((ingredient) => {
       console.log(`ingredient ${req.params.id} info retrieved!`)
       //res.send(ingredient)

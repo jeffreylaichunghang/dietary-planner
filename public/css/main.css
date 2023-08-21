@@ -7,6 +7,11 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
+  margin-right: 1rem;
+}
+
+.top>h4 {
+  margin-right: 1rem;
 }
 
 .auth-page {
@@ -55,4 +60,67 @@ body {
 
 .disappear {
   display: none;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+#date {
+  padding: 3px 40px 3px 30px;
+  font-size: large;
+  margin-right: 1rem;
+  border-radius: 5px;
+}
+
+#burgerMenu {
+  display: inline-block;
+}
+
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: antiquewhite;
+  overflow-x: hidden;
+  padding-top: 60px;
+  transition: 0.5s;
+}
+
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: black;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: slategrey;
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.openbtn {
+  font-size: 40px;
+  cursor: pointer;
+  background-color: white;
+  color: #111;
+  padding: 10px 15px;
+  border: none;
+}
+
+.openbtn:hover {
+  color: #444;
 }

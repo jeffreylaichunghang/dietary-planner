@@ -3,12 +3,14 @@ const IngredientService = require('./ingredient-service')
 class DishService {
   constructor(knex) {
     this.knex = knex
-    this.ingredientService = new IngredientService(knex)
+    this.pagination = new IngredientService(knex).pagination
   }
 
-  async getDishPage() {
-    return await this.knex('dish')
+  async getDishPage(page) {
+    let data = await this.knex('dish')
       .join('dish_info', 'dish_info_id', 'dish_info.id')
+
+    return this.pagination(page, data)
   }
 
   async getDishInfo(id) {

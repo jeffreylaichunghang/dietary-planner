@@ -20,9 +20,33 @@ class IngredientService {
     return largestId
   }
 
-  async getIngredientPage() {
-    return await this.knex('ingredient')
+  pagination(page, data) {
+
+    //set up page and limit
+    let pageNum = parseInt(page ??= 1);
+    let limitNum = 12
+    console.log(pageNum, limitNum)
+
+    const startIndex = (pageNum - 1) * limitNum
+    const endIndex = (page) * limitNum
+
+    let paginated = {};
+
+    paginated.limit = limitNum
+    pageNum > 1 ? paginated.previous = pageNum - 1 : paginated.previous = pageNum
+    endIndex < data.length ? paginated.next = pageNum + 1 : paginated.next = pageNum
+    paginated.thisPage = pageNum
+
+
+    paginated.result = data.slice(startIndex, endIndex)
+    return paginated
+  }
+
+  async getIngredientPage(page) {
+    let data = await this.knex('ingredient')
       .join('ingredient_info', 'ingredient_info_id', 'ingredient_info.id')
+
+    return this.pagination(page, data)
   }
 
   async getIngredient(id) {

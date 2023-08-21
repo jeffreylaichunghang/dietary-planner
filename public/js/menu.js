@@ -1,6 +1,17 @@
 const table = document.getElementById('menu-list')
 let AllDish, selectedItem, meal, date;
 
+// Sidebar
+function openNav() {
+  $('#sidebar').css('width', '250px')
+  $('#main').css('margin-left', '250px')
+}
+
+function closeNav() {
+  $('#sidebar').css('width', '0px')
+  $('#main').css('margin-left', '0px')
+}
+
 $(document).ready(() => {
   // date = getTodayDate()
   // console.log(date)

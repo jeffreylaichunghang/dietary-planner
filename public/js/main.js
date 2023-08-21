@@ -1,3 +1,14 @@
+// Sidebar
+function openNav() {
+  $('#sidebar').css('width', '250px')
+  $('#main').css('margin-left', '250px')
+}
+
+function closeNav() {
+  $('#sidebar').css('width', '0px')
+  $('#main').css('margin-left', '0px')
+}
+
 // Ingredient
 $('.macros').on('keyup', (e) => {
   console.log('keyup')

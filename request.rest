@@ -1,0 +1,1 @@
+GET https://api.nal.usda.gov/fdc/v1/foods/list?api_key=8hBOB6WSy1XMg5vgfs3yJIBBOVxphcXdPZsWwfDa&pageSize=50&pageNumber=1&dataType=Branded

@@ -10,7 +10,7 @@ class DishRoute {
   route() {
     const router = this.express.Router()
 
-    router.get('/dish', isLoggedIn, this.getDishPage.bind(this))
+    router.get('/dish', this.getDishPage.bind(this))
     router.get('/dish/:id', isLoggedIn, this.getDishInfo.bind(this))
     router.get('/selectIngredient', isLoggedIn, this.getAllIngredient.bind(this))
     router.put('/updateDish/:id', this.updateDish.bind(this))
@@ -21,10 +21,16 @@ class DishRoute {
   }
 
   getDishPage(req, res) {
-    return this.service.getDishPage().then((data) => {
+    let page = req.query.page
+    return this.service.getDishPage(page).then((data) => {
       //res.send(data)
+      console.log('dish data :', data)
       res.render('dishes', {
         script: scripts,
+        limit: data.limit,
+        previous: data.previous,
+        thisPage: data.thisPage,
+        next: data.next,
         dish: data
       })
     })
