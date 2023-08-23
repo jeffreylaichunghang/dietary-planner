@@ -6,7 +6,7 @@ const DishService = require('./service/dish-service');
 const MenuService = require('./service/menu-service');
 const MenuRoute = require('./router/menu-route');
 const AuthRoute = require('./router/auth-route');
-const setupPassport = require('./utilities/passport')
+const setupPassport = require('./auth/passport')
 const knexfile = require('./db/knexfile').development;
 
 //npm modules

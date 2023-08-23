@@ -12,6 +12,8 @@ class AuthRoute {
     router.get('/login', notLoggedIn, this.getLoginPage.bind(this))
     router.get('/signup', notLoggedIn, this.getSignupPage.bind(this))
     router.get('/error', this.getErrorPage.bind(this))
+    router.get('/auth/google', this.googleAuth())
+    router.get('/auth/google/callback', this.googleAuthCb())
 
     router.post('/login', this.authenticate())
     router.post('/signup', this.signup())
@@ -52,6 +54,19 @@ class AuthRoute {
     req.logout(function (err) {
       if (err) { return next(err); }
       res.redirect('/login');
+    })
+  }
+
+  googleAuth() {
+    return this.passport.authenticate('google', {
+      scope: ['email', "profile"],
+    })
+  }
+
+  googleAuthCb() {
+    return this.passport.authenticate('google', {
+      failureRedirect: '/login',
+      successRedirect: '/menu'
     })
   }
 }

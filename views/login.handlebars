@@ -8,7 +8,7 @@
       autofocus>
     <label for="inputPassword" class="sr-only">Password</label>
     <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
-    <div style="color: red;font-weight: bold">
+    <div style="color: red;font-weight: bold" id="error-msg">
       {{message}}
     </div>
     <div class="checkbox mb-3">
@@ -16,7 +16,8 @@
         <input type="checkbox" value="remember-me"> Remember me
       </label>
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" id="signIn-btn">Sign in</button>
+    <a href="/auth/google" class="btn btn-lg btn-block" type="submit">Sign in with Google</a>
     <p class="mt-5 mb-3 text-muted">&copy; 2023-2024</p>
   </form>
 </div>

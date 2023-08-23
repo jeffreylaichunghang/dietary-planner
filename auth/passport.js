@@ -1,9 +1,10 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
+const googleStrategy = require('./google-strategy')
 const knexfile = require('../db/knexfile').development;
 const knex = require('knex')(knexfile);
 const bcrypt = require('bcrypt');
-const salt = bcrypt.genSaltSync(10);
+
 
 module.exports = (app) => {
   app.use(passport.initialize());
@@ -120,4 +121,6 @@ module.exports = (app) => {
     let user = users[0]
     return done(null, user)
   })
+
+  googleStrategy(passport)
 }

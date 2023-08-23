@@ -4,7 +4,7 @@
   "description": "A brief description of what this project does and who it's for",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watchAll"
   },
   "keywords": [],
   "author": "Jeffrey",
@@ -18,10 +18,16 @@
     "express-handlebars": "^7.1.2",
     "express-session": "^1.17.3",
     "handlebars": "^4.7.8",
+    "jest": "^29.6.2",
+    "jest-puppeteer": "^9.0.0",
     "knex": "^2.5.1",
     "method-override": "^3.0.0",
     "passport": "^0.6.0",
+    "passport-google-oauth": "^2.0.0",
+    "passport-google-oidc": "^0.1.0",
     "passport-local": "^1.0.0",
-    "pg": "^8.11.2"
+    "pg": "^8.11.2",
+    "puppeteer": "^21.1.0",
+    "supertest": "^6.3.3"
   }
 }
