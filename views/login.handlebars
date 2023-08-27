@@ -1,7 +1,6 @@
 <div class="auth-page">
   <form class="form-signin" method="POST" action="/login">
-    <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72"
-      height="72">
+    <img class="mb-4" src="/img/logo.jpg" alt="" width="300" height="300">
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     <label for="inputUsername" class="sr-only">Username</label>
     <input type="text" id="inputUsername" class="form-control" placeholder="Username" name="username" required
@@ -11,10 +10,8 @@
     <div style="color: red;font-weight: bold" id="error-msg">
       {{message}}
     </div>
-    <div class="checkbox mb-3">
-      <label>
-        <input type="checkbox" value="remember-me"> Remember me
-      </label>
+    <div class="mb-3">
+      Don't have an account? <a href="/signup">Sign up</a>
     </div>
     <button class="btn btn-lg btn-primary btn-block" type="submit" id="signIn-btn">Sign in</button>
     <a href="/auth/google" class="btn btn-lg btn-block" type="submit">Sign in with Google</a>

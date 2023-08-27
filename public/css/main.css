@@ -41,6 +41,11 @@ body {
   margin: 1rem;
 }
 
+#selectIngredient,
+#selectDish {
+  max-width: 7rem;
+}
+
 #warning-body {
   text-align: center;
   font-size: xx-large;

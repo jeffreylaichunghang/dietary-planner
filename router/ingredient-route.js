@@ -20,20 +20,20 @@ class IngredientRouter {
   }
 
   getIngredientPage(req, res) {
-    const page = req.query.page
+    const page = req.query.page ? req.query.page : 1;
     console.log('page :', page)
     return this.service.getIngredientPage(page).then((data) => {
-      //res.send(ingredients)
-      console.log(data.thisPage)
-      console.log(data)
-      res.render('ingredients', {
-        ingredient: data.result,
-        limit: data.limit,
-        previous: data.previous,
-        thisPage: data.thisPage,
-        next: data.next,
-        script: scripts,
-      })
+      res.send(data)
+      // console.log(data.thisPage)
+      // console.log(data)
+      // res.render('ingredients', {
+      //   ingredient: data.result,
+      //   limit: data.limit,
+      //   previous: data.previous,
+      //   thisPage: data.thisPage,
+      //   next: data.next,
+      //   script: scripts,
+      // })
     })
   }
 
@@ -41,11 +41,11 @@ class IngredientRouter {
     //console.log(req.params.id)
     return this.service.getIngredient(req.params.id).then((ingredient) => {
       console.log(`ingredient ${req.params.id} info retrieved!`)
-      //res.send(ingredient)
-      res.render('ingredient', {
-        info: ingredient[0],
-        script: scripts
-      })
+      res.send(ingredient)
+      // res.render('ingredient', {
+      //   info: ingredient[0],
+      //   script: scripts
+      // })
     })
   }
 

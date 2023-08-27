@@ -3,64 +3,88 @@ const IngredientService = require('../../service/ingredient-service')
 const request = require('supertest');
 const express = require("express");
 const app = express();
-const knex = require('knex')(require('../../db/knexfile'))
-
+const knex = require('knex')(require('../../db/knexfile').development)
 app.use(express.urlencoded({ extended: false }));
-app.use("/", IngredientRouter);
-
-let ingredientService;
-let response;
-let ingredientRouter;
+const ingredientService = new IngredientService(knex);
+const ingredientRouter = new IngredientRouter(express, ingredientService).route()
 
 describe('IngredientRouter with a ingredientService', () => {
   beforeEach(() => {
-    ingredientService = new IngredientService(knex)
-    ingredientRouter = new IngredientRouter(express, ingredientService);
-
+    app.use("/", ingredientRouter);
   })
 
-  test('The ingredientRouter should call getIngredientPage', (done) => {
-    let page = 1
-    ingredientRouter.getIngredientPage(page, response)
-      .then(() => {
-        expect(ingredientService.getIngredientPage).toHaveBeenCalledWith(page);
-        done();
+  test('get ingredient route', (done) => {
+    request(app)
+      .get('/ingredient')
+      .expect("Content-Type", /json/)
+      .expect(200)
+
+    done()
+  })
+
+  test('get ingredient page 1 when page is not specified', done => {
+    request(app)
+      .get("/ingredient")
+      .expect("Content-Type", /json/)
+      .expect(200)
+      .expect((res) => {
+        res.thisPage = 1;
       })
+      .end((err, res) => {
+        if (err) return done(err);
+        return done();
+      });
   })
 
-  //unit
-  test('IngredientService should be able to get one ingredient data', () => {
-    return
-  })
-
-  //integration
-  test.only('The ingredientRouter should get one ingredient to response of an id', (done) => {
-    let id = 1
-    ingredientRouter.getIngredient(id, response)
-      .then(() => {
-        this.ingredientService.getIngredient(id)
+  test('get specified ingredient page when receiving page query request', done => {
+    request(app)
+      .get("/ingredient")
+      .expect("Content-Type", /json/)
+      .query({ page: 2 })
+      .expect(200)
+      .expect((res) => {
+        res.thisPage = 2;
       })
+      .end((err, res) => {
+        if (err) return done(err);
+        return done();
+      });
   })
 
-  test('The ingredientRouter should add response in POST', (done) => {
-    let newIngredient = {
-      body: {
-        name: 'new ingredient'
-      }
-    }
-    ingredientRouter.addIngredient(newIngredient, response)
-      .then(() => {
-        expect(ingredientService.addIngredient).toHaveBeenCalledWith('new ingredient')
+  test('returned data format', done => {
+    request(app)
+      .get("/ingredient")
+      .expect("Content-Type", /json/)
+      .expect(200)
+      .expect((res) => {
+        expect(res).toEqual(expect.objectContaining({}))
+        expect(res.result).toEqual(expect.arrayContaining([]))
       })
+      .end((err, res) => {
+        if (err) return done(err);
+        return done();
+      });
   })
 
-  test('The ingredientRouter should add response in PUT', (done) => {
-    let name = 'new ingredient'
-    let id = 1
-    ingredientRouter.updateIngredient(name, id, response)
-      .then(() => {
-        expect(ingredientService.updateIngredient)
-          .toHaveBeenCalledWith(name, id)
+  test('data from getting one ingredient', done => {
+    request(app)
+      .get("/ingredient/1")
+      .query({ id: 1 })
+      .expect("Content-Type", /json/)
+      .expect(200)
+      .expect((res) => {
+        let data = res.body[0]
+        res.length === 1
+        expect(res[0]).toEqual(expect.objectContaining({}))
+        expect(data).toHaveProperty('id')
+        expect(data).toHaveProperty('calories')
+        expect(data).toHaveProperty('carb')
+        expect(data).toHaveProperty('protein')
+        expect(data).toHaveProperty('fat')
       })
+      .end((err, res) => {
+        if (err) return done(err);
+        return done();
+      });
   })
 })

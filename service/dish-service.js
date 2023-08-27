@@ -55,7 +55,7 @@ class DishService {
           console.log('old ingredientIds :', ingredientIds)
 
 
-          if (ingredientIds && ingredientIds > 0) {
+          if (ingredientIds && ingredientIds.length > 0) {
             for (const iId of ingredientIds) {
               await trx.from('ingredient_dish').where({
                 dish_id: id,
