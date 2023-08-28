@@ -85,11 +85,12 @@ class DishRoute {
   deleteDish(req, res) {
     console.log('dish id :', req.params.id)
     return this.service.deleteDish(req.params.id).then((data) => {
-      if (data.length !== 0) {
-        res.redirect(`/dish/${req.params.id}`)
-      } else {
+      console.log(data)
+      if (!data) {
         console.log('dish deleted')
         res.redirect('/dish')
+      } else {
+        res.redirect(`/dish/${req.params.id}`)
       }
     })
   }

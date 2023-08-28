@@ -73,7 +73,7 @@ A dietary planner for tracking one's dietary history to achieve his/her healthca
 
 - Add more integrations, unit tests and a few e2e
 
--
+- Implement flash messages
 
 
 ## Authors

@@ -1,26 +1,26 @@
-const MenuRoute = require('./menu-route')
+const { isLoggedIn } = require('../utilities/middleware')
 
 class SubscriptionRouter {
     constructor(express, subscribeService, stripe) {
         this.express = express;
         this.service = subscribeService;
         this.stripe = stripe;
-        this.user = new MenuRoute(express, subscribeService)
+        this.user;
     }
 
     route() {
         let router = this.express.Router()
 
-        router.get('/subscribe', this.getSubscribePage.bind(this))
+        router.get('/subscribe', isLoggedIn, this.getSubscribePage.bind(this))
         router.post('/subscribe', this.subscribe.bind(this))
 
         return router
     }
 
     getSubscribePage(req, res) {
-        console.log(this.user.user)
+        console.log(req.user)
+        this.user = req.user
         res.render('subscribe', {
-            layout: 'home',
             script: '/js/home.js'
         })
     }
@@ -32,6 +32,7 @@ class SubscriptionRouter {
         ]
 
         const product = subscription.filter(s => s[1].name === req.body.subscription)
+        console.log(this.user)
         console.log(req.body) // { subscription: '1 month' }
         console.log(product) // [ [ 1, { priceInCents: 10000, name: '1 month' } ] ]
 

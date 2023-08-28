@@ -2,6 +2,8 @@ body {
   height: 100vh;
 }
 
+/* homepage */
+
 .nav {
   display: flex;
   justify-content: space-around;
@@ -43,6 +45,15 @@ body {
   width: 70%;
   margin: auto;
 }
+
+/* subscription page */
+
+#subscription-options {
+  padding: 8rem;
+  text-align: center;
+}
+
+/*  */
 
 .top {
   display: flex;

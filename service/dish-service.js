@@ -51,11 +51,15 @@ class DishService {
         await this.getDishInfo(id).then(async function (data) {
           //delete old data from join table
           let ingredientIds = []
-          data.forEach(d => ingredientIds.push(d['ingredient_id']))
+          if (data[0].ingredient_id) {
+            data.forEach(d => ingredientIds.push(d['ingredient_id']))
+          }
           console.log('old ingredientIds :', ingredientIds)
+          console.log('data', data)
 
 
           if (ingredientIds && ingredientIds.length > 0) {
+            console.log('deleting old ingredients')
             for (const iId of ingredientIds) {
               await trx.from('ingredient_dish').where({
                 dish_id: id,

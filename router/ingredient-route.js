@@ -69,10 +69,10 @@ class IngredientRouter {
     console.log(req.params.id)
     return this.service.deleteIngredient(req.params.id).then((data) => {
       //res.send('ingredient deleted')
-      if (data.length !== 0) {
-        res.redirect(`/ingredient/${req.params.id}`)
-      } else {
+      if (!data) {
         res.redirect('/ingredient')
+      } else {
+        res.redirect(`/ingredient/${req.params.id}`)
       }
     })
   }

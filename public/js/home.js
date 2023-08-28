@@ -1,3 +1,12 @@
+// Sidebar
+function openNav() {
+    $('#sidebar').css('width', '250px')
+}
+
+function closeNav() {
+    $('#sidebar').css('width', '0px')
+}
+
 //stripe
 function subscribe() {
     fetch('http://localhost:3000/subscribe', {
