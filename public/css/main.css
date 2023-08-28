@@ -2,6 +2,48 @@ body {
   height: 100vh;
 }
 
+.nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.navItems {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  list-style: none;
+}
+
+.navItems>li {
+  padding: 0.5rem 2rem;
+  margin: 0 1.5rem;
+  box-shadow: 1px 1px 5px black;
+  border-radius: 5px;
+}
+
+.navItems>li>a {
+  text-decoration: none;
+  font-size: x-large;
+  font-weight: 700;
+  color: #111;
+}
+
+#home-body {
+  background-color: rgb(244, 237, 222);
+  height: 90vh;
+  display: flex;
+  place-items: center;
+  text-align: center;
+}
+
+#home-body>h1 {
+  font-size: 6rem;
+  font-weight: bolder;
+  width: 70%;
+  margin: auto;
+}
+
 .top {
   display: flex;
   justify-content: space-between;

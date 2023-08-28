@@ -6,30 +6,55 @@ A dietary planner for tracking one's dietary history to achieve his/her healthca
 
 ## API Reference
 
-#### Get all items
+#### Get all ingredients
 
 ```http
-  GET /api/items
+  GET /ingredient
 ```
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
-| `api_key` | `string` | **Required**. Your API key |
+| --------- | -------- | To get a list of ingredients |
 
-#### Get item
+#### Get one ingredient
 
 ```http
-  GET /api/items/${id}
+  GET /ingredient/${id}
 ```
 
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
-| `id`      | `string` | **Required**. Id of item to fetch |
+| `id`      | `number` | To get information of one ingredient |
 
-#### add(num1, num2)
+#### Create one ingredient
 
-Takes two numbers and returns the sum.
+```http
+  POST /ingredient/${id}
+```
 
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `number` | To create one ingredient          |
+
+#### Update one ingredient
+
+```http
+  UPDATE /ingredient/${id}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `number` | To update information of one ingredient |
+
+#### Delete one ingredient
+
+```http
+  DELETE /ingredient/${id}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `number` | To delete one ingredient |
 
 ## Documentation
 
@@ -38,21 +63,19 @@ Takes two numbers and returns the sum.
 [Documentation](https://api.data.gov/docs/developer-manual/)
 
 
-## Features
-
-- Light/dark mode toggle
-- Live previews
-- Fullscreen mode
-- Cross platform
-
-
 ## Roadmap
 
-- Additional browser support
+- finish stripe payment along with user authorization across multiple pages
 
-- Add more integrations
+- Add sorting features for tables
+
+- Add table columns toggling
+
+- Add more integrations, unit tests and a few e2e
+
+-
 
 
 ## Authors
 
-- [@octokatherine](https://www.github.com/octokatherine)
+- [@jeffreylaichunghang](https://github.com/jeffreylaichunghang)

@@ -23,11 +23,15 @@ class AuthRoute {
   }
 
   getLoginPage(req, res) {
-    res.render('login')
+    res.render('login', {
+      layout: 'home'
+    })
   }
 
   getSignupPage(req, res) {
-    res.render('signup')
+    res.render('signup', {
+      layout: 'home'
+    })
   }
 
   authenticate() {

@@ -1,5 +1,5 @@
 let scripts = ['/js/main.js']
-const { isLoggedIn, pagination } = require('../utilities/middleware')
+const { isLoggedIn } = require('../utilities/middleware')
 
 class IngredientRouter {
   constructor(express, service) {
@@ -10,8 +10,8 @@ class IngredientRouter {
   route() {
     const router = this.express.Router();
 
-    router.get('/ingredient', this.getIngredientPage.bind(this));
-    router.get('/ingredient/:id', this.getIngredient.bind(this));
+    router.get('/ingredient', isLoggedIn, this.getIngredientPage.bind(this));
+    router.get('/ingredient/:id', isLoggedIn, this.getIngredient.bind(this));
     router.post('/addIngredient', this.addIngredient.bind(this))
     router.put('/updateIngredient/:id', this.updateIngredient.bind(this))
     router.delete('/deleteIngredient/:id', this.deleteIngredient.bind(this))
@@ -23,17 +23,17 @@ class IngredientRouter {
     const page = req.query.page ? req.query.page : 1;
     console.log('page :', page)
     return this.service.getIngredientPage(page).then((data) => {
-      res.send(data)
-      // console.log(data.thisPage)
-      // console.log(data)
-      // res.render('ingredients', {
-      //   ingredient: data.result,
-      //   limit: data.limit,
-      //   previous: data.previous,
-      //   thisPage: data.thisPage,
-      //   next: data.next,
-      //   script: scripts,
-      // })
+      //res.send(data)
+      console.log(data.thisPage)
+      console.log(data)
+      res.render('ingredients', {
+        ingredient: data.result,
+        limit: data.limit,
+        previous: data.previous,
+        thisPage: data.thisPage,
+        next: data.next,
+        script: scripts,
+      })
     })
   }
 
@@ -41,11 +41,11 @@ class IngredientRouter {
     //console.log(req.params.id)
     return this.service.getIngredient(req.params.id).then((ingredient) => {
       console.log(`ingredient ${req.params.id} info retrieved!`)
-      res.send(ingredient)
-      // res.render('ingredient', {
-      //   info: ingredient[0],
-      //   script: scripts
-      // })
+      //res.send(ingredient)
+      res.render('ingredient', {
+        info: ingredient[0],
+        script: scripts
+      })
     })
   }
 
