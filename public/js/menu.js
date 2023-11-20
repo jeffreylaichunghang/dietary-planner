@@ -169,7 +169,7 @@ $('#menu-table').submit(function (e) {
   }
   //send as a data set through ajax
   $.ajax({
-    url: `http://localhost:3000/updateMenu/${menuId}`,
+    url: `https://distaryplanner.site/updateMenu/${menuId}`,
     method: 'POST',
     contentType: 'application/json',
     data: JSON.stringify({
@@ -344,7 +344,7 @@ function getAllDishes() {
   console.log('getting dish')
   return new Promise((resolve, reject) => {
     $.ajax({
-      url: 'http://localhost:3000/selectDish',
+      url: 'https://dietaryplanner.site/selectDish',
       success: function (result) {
         resolve(result)
       },
