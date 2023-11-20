@@ -118,7 +118,7 @@ A dietary planner for tracking one's dietary history to achieve his/her healthca
 
 #### Update menu
 ```http
-  GET /updateMenu
+  UPDATE /updateMenu
 ```
 
 | Parameter | Type     | Description                       |
