@@ -30,8 +30,8 @@ module.exports = {
     client: 'postgresql',
     connection: {
       database: 'nutrition',
-      user: process.env.USERNAME,
-      password: process.env.PASSWORD
+      user: 'postgres',
+      password: 'postgres'
     },
     pool: {
       min: 2,
@@ -49,8 +49,8 @@ module.exports = {
     client: 'postgresql',
     connection: {
       database: 'nutrition',
-      user: process.env.USERNAME,
-      password: process.env.PASSWORD
+      user: 'postgres',
+      password: 'postgres'
     },
     pool: {
       min: 2,
