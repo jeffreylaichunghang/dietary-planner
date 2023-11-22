@@ -29,9 +29,9 @@ module.exports = {
   staging: {
     client: 'postgresql',
     connection: {
-      database: 'my_db',
-      user: 'username',
-      password: 'password'
+      database: 'nutrition',
+      user: process.env.USERNAME,
+      password: process.env.PASSWORD
     },
     pool: {
       min: 2,
@@ -39,15 +39,18 @@ module.exports = {
     },
     migrations: {
       tableName: 'knex_migrations'
+    },
+    seeds: {
+      directory: './seeds'
     }
   },
 
   production: {
     client: 'postgresql',
     connection: {
-      database: 'my_db',
-      user: 'username',
-      password: 'password'
+      database: 'nutrition',
+      user: process.env.USERNAME,
+      password: process.env.PASSWORD
     },
     pool: {
       min: 2,
@@ -55,6 +58,9 @@ module.exports = {
     },
     migrations: {
       tableName: 'knex_migrations'
+    },
+    seeds: {
+      directory: './seeds'
     }
   }
 
