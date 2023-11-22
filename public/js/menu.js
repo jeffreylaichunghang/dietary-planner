@@ -169,7 +169,7 @@ $('#menu-table').submit(function (e) {
   }
   //send as a data set through ajax
   $.ajax({
-    url: `https://distaryplanner.site/updateMenu/${menuId}`,
+    url: `https://dietaryplanner.site/updateMenu/${menuId}`,
     method: 'POST',
     contentType: 'application/json',
     data: JSON.stringify({

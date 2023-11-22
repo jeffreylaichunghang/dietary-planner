@@ -191,7 +191,7 @@ $('#dish-table').submit(function (e) {
   }
   //send as a data set through ajax
   $.ajax({
-    url: `https://distaryplanner.site/updateDish/${dishId}`,
+    url: `https://dietaryplanner.site/updateDish/${dishId}`,
     method: 'PUT',
     contentType: 'application/json',
     data: JSON.stringify({
