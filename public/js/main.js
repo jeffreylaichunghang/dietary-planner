@@ -191,6 +191,7 @@ $('#dish-table').submit(function (e) {
   }
   //send as a data set through ajax
   $.ajax({
+    url: `http://localhost:3000/updateDish/${dishId}`,
     url: `https:///updateDish/${dishId}`,
     method: 'PUT',
     contentType: 'application/json',

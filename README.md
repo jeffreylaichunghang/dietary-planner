@@ -3,6 +3,15 @@
 
 A dietary planner for tracking one's dietary history to achieve his/her healthcare goal
 
+https://dietaryplanner.site/
+
+- Testing account:
+username: johndoe123
+password: 1234
+
+- See a sample menu:
+do to menu of 17/8/2023
+
 
 ## API Reference
 
