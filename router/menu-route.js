@@ -32,6 +32,17 @@ class MenuRoute {
   getMenu(req, res) {
     console.log(req.query)
 
+    if (!req.query.date) {
+      return res.render('menus', {
+        script: scripts[1],
+        user: this.user,
+        id: null,
+        date: null,
+        dishes: null,
+        message: 'Please pick a date'
+      })
+    }
+
     return this.service.getMenu(this.user.id, req.query).then((data) => {
       console.log('data: ', data)
       if (!data[0].menu_id) {
