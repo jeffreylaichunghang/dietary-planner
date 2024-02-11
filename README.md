@@ -3,7 +3,28 @@
 
 A dietary planner for tracking one's dietary history to achieve his/her healthcare goal
 
-https://dietaryplanner.site/
+<https://dietaryplanner.site/>
+
+**frontend/template engine**
+express-handlebars
+
+**backend**
+Node js, Express js
+
+**database**
+Postgres, Knex js
+
+**authentication**
+Passport js, OAuth, Google Login
+
+**Api testing**
+Postmen
+
+**Deployment**
+AWS EC2, Route 53
+
+**CI/CD**
+Github Action
 
 - Testing account:
 username: johndoe123
@@ -11,7 +32,6 @@ password: 1234
 
 - See a sample menu:
 do to menu of 17/8/2023
-
 
 ## API Reference
 
@@ -126,6 +146,7 @@ do to menu of 17/8/2023
 | `{userId, date}`| `{userId: number, date: string}` | To get the user's menu on a specified date with a format MM/DD/YYYY |
 
 #### Update menu
+
 ```http
   UPDATE /updateMenu
 ```
@@ -134,13 +155,11 @@ do to menu of 17/8/2023
 | :-------- | :------- | :-------------------------------- |
 | `{totalRowValue, dishList, date}`| `{totalRowValue: number[], dishList: string[], date: string}` | Updating user's menu require totalRoValue which is an array of number from the last row of the menu table, dishList which is an array of string including all dishes composing the menu and the date with a format MM/DD/YYYY |
 
-
 ## Documentation
 
 [Documentation](https://app.swaggerhub.com/apis/fdcnal/food-data_central_api/1.0.1#/FoodNutrient)
 [Documentation](https://fdc.nal.usda.gov/api-guide.html)
 [Documentation](https://api.data.gov/docs/developer-manual/)
-
 
 ## Roadmap
 
@@ -153,7 +172,6 @@ do to menu of 17/8/2023
 - Add more integrations, unit tests and a few e2e
 
 - Implement flash messages
-
 
 ## Authors
 
