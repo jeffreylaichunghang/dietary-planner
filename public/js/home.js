@@ -9,7 +9,7 @@ function closeNav() {
 
 //stripe
 function subscribe() {
-    fetch('http://localhost:3000/subscribe', {
+    fetch(`${process.env.NODE_ENV === 'production' ? process.env.REMOTE_URL : process.env.LOCAL_URL}subscribe`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

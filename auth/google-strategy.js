@@ -9,7 +9,7 @@ module.exports = (passport) => {
     new GoogleStrategy({
       clientID: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
-      callbackURL: 'http://localhost:3000/auth/google/callback'
+      callbackURL: `${process.env.NODE_ENV === 'production' ? process.env.REMOTE_URL : process.env.LOCAL_URL}auth/google/callback`
     },
       async (accessToken, refreshToken, profile, done) => {
         //console.log(profile);
