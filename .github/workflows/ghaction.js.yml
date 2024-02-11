@@ -18,6 +18,18 @@ jobs:
     - uses: actions/checkout@v2
       with:
         token: ${{ secrets.APP_SECRET }}
+    - name: reate env file
+      run: |
+        touch .env
+        echo NODE_ENV=production >> .env
+        echo USERNAME=${{ secrets.USERNAME }} >> .env
+        echo PASSWORD=${{ secrets.PASSWORD }} >> .env
+        echo REMOTE_URL=https://dietaryplanner.site/ >> .env
+        echo SERVER_URL=http://localhost:3000 >> .env
+        echo APIKEY=${{ secrets.APIKEY }} >> .env
+        echo STRIPE_PRIVATE_KEY=${{ secrets.STRIPE_PRIVATE_KEY }} >> .env
+        echo GOOGLE_ID=${{ secrets.GOOGLE_ID }} >> .env
+        echo GOOGLE_SECRET=${{ secrets.GOOGLE_SECRET }} >> .env
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
